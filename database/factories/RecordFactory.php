@@ -25,8 +25,8 @@ class RecordFactory extends Factory
         return [
             'full_name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'num_phone' => $this->faker->phoneNumber,
-            'net_income' => $this->faker->numberBetween(700, 5000),
+            'phone_number' => $this->faker->phoneNumber,
+            'income' => $this->faker->numberBetween(700, 5000),
             'requested_amount' => $this->faker->randomElement([100000, 150000, 200000, 250000]),
             'employee_id' => Employee::all()->random()->id
         ];
