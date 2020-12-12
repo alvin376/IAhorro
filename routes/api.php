@@ -20,12 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /* Registros de clientes */
-Route::prefix('record')->group(function() {
-	Route::post('store', [RecordController::class, 'store'])->name('record.store');
-	Route::get('employee_id/{id}', [RecordController::class, 'getRecords'])->name('record.getRecords');
+Route::prefix('records')->group(function() {
+	Route::post('/', [RecordController::class, 'store'])->name('records.store');
 });
 
 /* Expertos hipotecarios */
-Route::prefix('employee')->group(function() {
-	Route::get('getRecords/{employee_id}', [EmployeeController::class, 'getRecords'])->name('employee.getRecords');
+Route::prefix('employees')->group(function() {
+	Route::get('{employee_id}/records', [EmployeeController::class, 'getRecords'])->name('employees.records');
 });

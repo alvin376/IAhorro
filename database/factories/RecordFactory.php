@@ -36,9 +36,6 @@ class RecordFactory extends Factory
         ];
     }
 
-    /*
-     *
-     */
     public function get_time_slot() {
 
         $max_minute = 24*60;
@@ -47,17 +44,6 @@ class RecordFactory extends Factory
         $time_slot_end_minutes = rand($min_minute,$max_minute);
         $time_slot_start_minutes = rand($time_slot_end_minutes-$min_minute,$time_slot_end_minutes-60);
 
-        return ['time_slot_start' => self::minutes_to_hours($time_slot_start_minutes), 'time_slot_end' => self::minutes_to_hours($time_slot_end_minutes)];
-    }
-
-    /*
-     *
-     */
-    public function minutes_to_hours($time_minutes) {
-
-        $hours = floor($time_minutes / 60);
-        $minutes = $time_minutes - ($hours * 60);
-
-        return $hours . ':' . $minutes;
+        return ['time_slot_start' => $time_slot_start_minutes, 'time_slot_end' => $time_slot_end_minutes];
     }
 }
