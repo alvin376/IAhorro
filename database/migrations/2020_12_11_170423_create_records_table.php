@@ -17,8 +17,8 @@ class CreateRecordsTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('email')->unique();
-            $table->string('num_phone');
-            $table->integer('net_income'); //Ingresos netos
+            $table->string('phone_number');
+            $table->integer('income'); //Ingresos netos
             $table->integer('requested_amount'); //Cantidad solicitada
             
             //Forenign Keys
