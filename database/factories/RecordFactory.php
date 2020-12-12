@@ -22,8 +22,8 @@ class RecordFactory extends Factory
      */
     public function definition()
     {
-        $time_slot = self::time_slot();
-        
+        $time_slot = self::get_time_slot();
+
         return [
             'full_name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
@@ -39,7 +39,7 @@ class RecordFactory extends Factory
     /*
      *
      */
-    public function time_slot() {
+    public function get_time_slot() {
 
         $max_minute = 24*60;
         $min_minute = 8*60;
