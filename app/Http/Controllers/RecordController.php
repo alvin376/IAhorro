@@ -18,9 +18,11 @@ class RecordController extends Controller
     	$validateData = Validator::make($request->all(), [
             'full_name' => 'required|max:255',
     		'email' => 'required|email|max:255',
-    		'num_phone' => 'required|max:255',
-    		'net_income' => 'required|Integer',
-    		'requested_amount' => 'required|Integer'
+    		'phone_number' => 'required|max:255',
+    		'income' => 'required|Integer',
+    		'requested_amount' => 'required|Integer',
+    		'time_slot_start' => 'required|max:255',
+    		'time_slot_end' => 'required|max:255'
         ]);
 
         if ($validateData->fails()) {
@@ -30,10 +32,12 @@ class RecordController extends Controller
     	$record = new Record();
     	$record->full_name = $request->full_name;
     	$record->email = $request->email;
-    	$record->num_phone = $request->num_phone;
-    	$record->net_income = $request->net_income;
+    	$record->phone_number = $request->phone_number;
+    	$record->income = $request->income;
     	$record->requested_amount = $request->requested_amount;
     	$record->employee_id = Employee::all()->random()->id;
+    	$record->time_slot_start = $request->time_slot_start;
+    	$record->time_slot_end = $request->time_slot_end;
     	$record->save();
 
     	return ['result' => true, 'status' => 'success'];

@@ -18,8 +18,10 @@ class CreateRecordsTable extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone_number');
-            $table->integer('income'); //Ingresos netos
-            $table->integer('requested_amount'); //Cantidad solicitada
+            $table->integer('income');
+            $table->integer('requested_amount');
+            $table->string('time_slot_start');
+            $table->string('time_slot_end');
             
             //Forenign Keys
             $table->unsignedBigInteger('employee_id');
