@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /* Registros de clientes */
 Route::prefix('records')->group(function() {
-	Route::post('/', [RecordController::class, 'store'])->name('records.store');
+	Route::post('/', [RecordController::class, 'store'])->name('records.store')->middleware('verify.record');
 });
 
 /* Expertos hipotecarios */
