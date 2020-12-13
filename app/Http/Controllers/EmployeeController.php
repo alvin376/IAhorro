@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use Validator;
 use DB;
+use App\Helpers\Util;
 
 class EmployeeController extends Controller
 {
     public function getRecords($employee_id) {
-    	$current_minutes = self::get_current_minutes();
-
-    	// dd($current_minutes);
+    	$current_minutes = Util::time_to_minutes(date('H:i'));
+    	
     	$employee = Employee::findOrFail($employee_id);
     	$records = $employee->records()
     				->select(
@@ -32,15 +32,7 @@ class EmployeeController extends Controller
     				])
     				->orderBy('scoring', 'desc')
     				->get();
-    	// dd($records);
+
     	return $records;
-    }
-
-    public function get_current_minutes() {
-
-    	$current_time = explode(':', date('H:i'));
-    	$minutes = ($current_time[0]*60)+$current_time[1];
-
-    	return $minutes;
     }
 }
