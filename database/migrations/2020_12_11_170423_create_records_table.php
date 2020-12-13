@@ -20,8 +20,8 @@ class CreateRecordsTable extends Migration
             $table->string('phone_number');
             $table->integer('income');
             $table->integer('requested_amount');
-            $table->string('time_slot_start');
-            $table->string('time_slot_end');
+            $table->integer('time_slot_start');
+            $table->integer('time_slot_end');
             
             //Forenign Keys
             $table->unsignedBigInteger('employee_id');

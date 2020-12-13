@@ -1,62 +1,122 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://statics.kreditiweb.com/img/logos/iahorro-logo.png" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Code Challenge iAhorro
+Encuentra el codigo resultado de la prueba
 
-## About Laravel
+## Instalación :wrench:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Por favor verifica los requerimientos del servidor antes de empezar. [Docuementación oficial](https://laravel.com/docs/8.x/installation)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Clona el repositorio
+	
+    git clone git@github.com:alvin376/IAhorro.git
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Cambiar a la carpeta del repositorio
 
-## Learning Laravel
+    cd IAhorro
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Instala todas las dependencias usando composer
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    composer install
 
-## Laravel Sponsors
+Copia el archivo `.env.example` y realiza los cambios de configuración encesarios enel archivo `.env`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    cp .env.example .env
 
-### Premium Partners
+Genera una nueva clave de aplicación
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+    php artisan key:generate
 
-## Contributing
+Ejecuta las migraciones de la base de datos (**Establezca la conexión de la base de datos en `.env` antes de migrar**)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    php artisan migrate
 
-## Code of Conduct
+Si deseas añadir algunos datos de prueba en la BD
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    php artisan db:seed
 
-## Security Vulnerabilities
+***Note*** : Se recomienda tener una base de datos limpia antes de sembrar. Puede actualizar sus migraciones en cualquier momento para limpiar la base de datos ejecutando el siguiente comando
+	
+	php artisan migrate:refresh
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Inicie el servidor de desarrollo local
 
-## License
+    php artisan serve
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ahora puede acceder al servidor en http://localhost:8000
+
+## Uso de apis creadas :pushpin:
+
+**Guardar información de cliente**
+----
+  _Guardar los datos de un cliente que solicite una hipoteca en iAhorro y asignarselo a un exporto hipotecario de forma aleatoria._
+
+* **URL**
+
+  _http://localhost:8000/api/records_
+
+* **Method:**
+  
+  _`POST`_
+ 
+
+* **Parametros Data**
+
+  **Required:**
+ 
+   `full_name=[string]`
+   `email=[string]`
+   `phone_number=[string]`
+   `income=[integer]`
+   `requested_amount=[integer]`
+   `time_slot_start=[string]`
+   `time_slot_end=[string]`
+
+   ***Note*** : Los campos `time_slot_start` y `time_slot_end` deben tener un formato `H:i`
+
+   ***Ejemplo*** : `time_slot_start = "12:45"` y `time_slot_end = "16:45"`
+
+* **Response Exitoso:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ "result" : true, "status" : "success" }`
+ 
+* **Error Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ "result" : false, "status" : "error_validate", "description" : { "<campo_erroneo>" : [ "<motivo_error>"] } }`
+
+**Obtener información de clientes**
+----
+  _Obtener la información de los clientes asociado un experto inmobiliario en específico dado la franja horaria de los clientes._
+
+* **URL**
+
+  _http://localhost:8000/api/employees/`employee_id`/records
+
+* **Method:**
+  
+  _`GET`_
+ 
+*  **URL Params**
+
+   **Required:**
+ 
+   `employee_id=[integer]`
+
+* **Response Exitoso:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ "records" : [<att_records>] }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 Not Found<br />
+
+
+## Modelo de datos:
+<iframe width="560" height="315" src='https://dbdiagram.io/embed/5e8b0b084495b02c3b894fd8'> </iframe>
+
+## Gratitud / Motivación :sunny:
+
+* Gracias por la oportunidad.

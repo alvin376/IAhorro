@@ -34,6 +34,6 @@ class EmployeeHelper {
                     ->orderBy('scoring', 'desc')
                     ->get();
 
-        return $records;
+        return ["records" => $records];
 	}
 }
