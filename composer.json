@@ -41,7 +41,8 @@
         },
         "files": [
             "app/Helpers/UtilHelper.php",
-            "app/Helpers/RecordHelper.php"
+            "app/Helpers/RecordHelper.php",
+            "app/Helpers/EmployeeHelper.php"
         ]
     },
     "autoload-dev": {
