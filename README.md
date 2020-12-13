@@ -115,7 +115,9 @@ Ahora puede acceder al servidor en http://localhost:8000
 
 
 ## Modelo de datos:
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/5e8b0b084495b02c3b894fd8'> </iframe>
+El diseño modelado de datos se encuentra como recurso estatico en la carpetas del proyecto 
+
+`/public/pdfs/modelado.pdf`
 
 ## Gratitud / Motivación :sunny:
 
